@@ -24,6 +24,7 @@ public class KlantenLijstController {
     public KlantenLijstController() {
         super();
         this.db = ApplicationLauncher.getDBaccess();
+        this.cdao = new CustomerDAO(db.getConnection());
     }
 
     public void setup() {
@@ -43,7 +44,24 @@ public class KlantenLijstController {
         }
         ApplicationLauncher.getSceneManager().showExistingCustomerScene(customer);
 
-        // TODO: wat als er geen customer geselecteerd is?
+    }
+
+    public void doBackToMenu(ActionEvent actionEvent) {
+        ApplicationLauncher.getSceneManager().showWelcomeScene();
+
+    }
+
+    public void doDeleteCustomer(ActionEvent event) {
+        Customer customer = customerList.getSelectionModel().getSelectedItem();
+        if (customer == null) {
+            warningText.setVisible(true);
+            warningText.setText("Je moet eerst een klant kiezen!");
+            return;
+        }
+        cdao.deleteCustomer(customer);
+        db.closeConnection();
+        ApplicationLauncher.getSceneManager().showCustomerListScene();
+
     }
 
 }

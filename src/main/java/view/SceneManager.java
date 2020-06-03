@@ -1,9 +1,6 @@
 package view;
 
-import controller.KlantenLijstController;
-import controller.NieuweKlantController;
-import controller.WelcomeController;
-import controller.WijzigKlantController;
+import controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,6 +63,19 @@ public class SceneManager {
             Parent root = loader.load();
             KlantenLijstController controller = loader.getController();
             controller.setup();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showCustomerById() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Klantenzoek.fxml"));
+            Parent root = loader.load();
+            ZoekKlantController controller = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

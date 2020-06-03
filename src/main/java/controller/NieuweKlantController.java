@@ -50,10 +50,12 @@ public class NieuweKlantController {
         klantnummerTextfield.setText(String.valueOf(newCustomer.getCustomerId()));
         db.closeConnection();
         System.out.println("Connection closed");
+        ApplicationLauncher.getSceneManager().showCustomerListScene();
     }
 
     public void doBackToMenu(ActionEvent actionEvent) {
-        // TODO: methode om terug te keren naar welkomst scherm
+        ApplicationLauncher.getSceneManager().showWelcomeScene();
+
     }
 
 

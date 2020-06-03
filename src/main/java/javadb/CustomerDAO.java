@@ -62,8 +62,7 @@ public class CustomerDAO extends AbstractDAO {
                 System.out.println("Klant met dit klantnummer bestaat niet");
             }
 
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("SQL error " + e.getMessage());
         }
         return result;
@@ -83,13 +82,27 @@ public class CustomerDAO extends AbstractDAO {
                 String surName = rs.getString("achternaam");
                 String mobile = rs.getString("telefoon");
                 customer = new Customer(initials, prefix, surName, mobile);
-                customer.setCustomerId(rs.getInt("klantnr")); 
+                customer.setCustomerId(rs.getInt("klantnr"));
                 result.add(customer);
             }
-        } catch (SQLException e){
-                System.out.println("SQL error " + e.getMessage());
-            }
-        return  result;
+        } catch (SQLException e) {
+            System.out.println("SQL error " + e.getMessage());
+        }
+        return result;
     }
 
+    public Customer deleteCustomer(Customer customer) {
+
+        String sql = "Delete From Klant Where klantnr = ?;";
+        Customer result = null;
+        try {
+            PreparedStatement ps = getStatement(sql);
+            ps.setInt(1, customer.getCustomerId());
+            executeManipulatePreparedStatement(ps);
+
+        } catch (SQLException e) {
+            System.out.println("SQL error " + e.getMessage());
+        }
+        return result;
+    }
 }

@@ -44,6 +44,19 @@ public class WelcomeController {
         });
 
         taskMenuButton.getItems().add(item2);
+
+        MenuItem item3 = new MenuItem("Klant zoeken");
+        // TODO: action handler voor tweede menu item
+        item3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                ApplicationLauncher.getSceneManager().showCustomerById();
+            }
+        });
+
+        taskMenuButton.getItems().add(item3);
+
     }
 
     @FXML
